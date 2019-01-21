@@ -1,0 +1,12 @@
+{
+  "name": "quiz-app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+	"repository": "git remote add origin git@github.com:h1ldebrand/quiz_app.git",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "h1ldebrand",
+  "license": "ISC"
+}
