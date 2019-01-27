@@ -3,10 +3,28 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-	"repository": "git remote add origin git@github.com:h1ldebrand/quiz_app.git",
+  "repository": "git remote add origin git@github.com:h1ldebrand/quiz_app.git",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+		"start": "webpack-dev-server --mode development --open --hot"
   },
-  "author": "h1ldebrand",
-  "license": "ISC"
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/core": "^7.2.2",
+    "@babel/preset-env": "^7.3.1",
+    "@babel/preset-react": "^7.0.0",
+    "@babel/preset-stage-1": "^7.0.0",
+    "babel-loader": "^8.0.5",
+    "path": "^0.12.7",
+    "webpack": "^4.29.0",
+    "webpack-cli": "^3.2.1",
+    "webpack-dev-server": "^3.1.14"
+  },
+  "dependencies": {
+    "lodash": "^4.17.11",
+    "react": "^16.7.0",
+    "react-dom": "^16.7.0",
+    "react-redux": "^6.0.0",
+    "redux": "^4.0.1"
+  }
 }
