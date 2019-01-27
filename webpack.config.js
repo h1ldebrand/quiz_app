@@ -23,6 +23,17 @@ module.exports = {
                     "css-loader", // translates CSS into CommonJS
                     "sass-loader" // compiles Sass to CSS, using Node Sass by default
                 ]
+            },
+            {
+                test: /\.(png|jpg|gif)$/i,
+                use: [
+                    {
+                        loader: 'url-loader',
+                        options: {
+                            limit: 200000
+                        }
+                    }
+                ]
             }
         ]
     },
@@ -35,6 +46,6 @@ module.exports = {
         contentBase: path.join(__dirname),
         historyApiFallback: true,
         compress: false,
-        port: 9002
+        port: 9001
     }
 };

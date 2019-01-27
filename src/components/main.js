@@ -7,6 +7,7 @@ import { fetchQuestion } from '../actions/question';
 // Components import
 import ActivityLog from './main/activity-log';
 import QuestionInfo from './main/question-info';
+import Loader from './main/loader';
 
 // Main page
 class Main extends Component {
@@ -16,13 +17,38 @@ class Main extends Component {
     }
 
     render() {
-        return (
-            <div className="main-page">
-                <ActivityLog />
-                <QuestionInfo />
-            </div>
-        );
+
+        if(this.props.question){
+            const {id, answer, question, category} = this.props.question;
+
+            return (
+                <div className="main-page">
+                    <ActivityLog />
+                    <QuestionInfo
+                        id={id}
+                        answer={answer}
+                        question={question}
+                        category={category}
+                    />
+                </div>
+
+            );
+
+        } else {
+            return (
+                <div className="main-page">
+                    <Loader />
+                </div>
+            )
+        }
+
     }
 }
 
-export default connect(null, {fetchQuestion})(Main)
+const mapStateToProps = (state) => {
+    return {
+        question: state.questions.question
+    }
+}
+
+export default connect(mapStateToProps, {fetchQuestion})(Main)
