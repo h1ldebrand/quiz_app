@@ -1,12 +1,11 @@
+// Node modules import
 import React, { Component } from 'react';
 
-class About extends Component{
-
+// About page
+export default class About extends Component {
     render() {
         return (
-            <div>About</div>
-        )
+            <div className="about-page">About page</div>
+        );
     }
 }
-
-export default About;

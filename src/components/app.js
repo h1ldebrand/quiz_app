@@ -1,18 +1,20 @@
+// Node modules import
 import React, { Component } from 'react';
 
-class App extends Component{
+// Component import
+import Header from './header';
 
+// Layout component
+export default class App extends Component {
     render() {
         return (
             <div className="app">
-                header
+                <Header />
                 <div className="container">
-                    { this.props.children }
+                    {this.props.children}
                 </div>
-                footer
             </div>
-        )
+        );
+
     }
 }
-
-export default App;

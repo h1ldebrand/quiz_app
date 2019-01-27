@@ -35,6 +35,6 @@ module.exports = {
         contentBase: path.join(__dirname),
         historyApiFallback: true,
         compress: false,
-        port: 9001
+        port: 9002
     }
 };
