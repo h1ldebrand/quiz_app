@@ -11,6 +11,8 @@ import routes from './routers';
 // Reducers import
 import reducers from './reducers';
 
+import './styles/index.scss';
+
 
 const createStoreWithMiddleware = applyMiddleware()(createStore);
 
