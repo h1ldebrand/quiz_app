@@ -6,8 +6,8 @@
   "repository": "git remote add origin git@github.com:h1ldebrand/quiz_app.git",
   "scripts": {
     "dev": "webpack-dev-server --mode development --open --hot",
-		"postinstall": "webpack -p",
-		"start": "node server.js"
+    "postinstall": "webpack -p",
+    "start": "node server.js"
   },
   "author": "",
   "license": "ISC",
@@ -29,6 +29,7 @@
     "react": "^16.7.0",
     "react-dom": "^16.7.0",
     "react-redux": "^6.0.0",
+    "react-router-3": "^3.2.2",
     "redux": "^4.0.1"
   }
 }
