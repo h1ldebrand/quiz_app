@@ -5,7 +5,9 @@
   "main": "index.js",
   "repository": "git remote add origin git@github.com:h1ldebrand/quiz_app.git",
   "scripts": {
-		"start": "webpack-dev-server --mode development --open --hot"
+    "dev": "webpack-dev-server --mode development --open --hot",
+		"postinstall": "webpack -p",
+		"start": "node server.js"
   },
   "author": "",
   "license": "ISC",
@@ -21,6 +23,8 @@
     "webpack-dev-server": "^3.1.14"
   },
   "dependencies": {
+    "colors": "^1.3.3",
+    "express": "^4.16.4",
     "lodash": "^4.17.11",
     "react": "^16.7.0",
     "react-dom": "^16.7.0",
