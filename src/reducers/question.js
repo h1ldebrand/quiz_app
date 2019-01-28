@@ -3,7 +3,7 @@ import { FETCH_QUESTION, INCREMENT_QUESTIONS_COUNT } from "../constants/question
 
 // Initial states for reducers
 const INITIAL_STATE = {
-    question: null,
+    question: {},
     totalCount : 0
 };
 
@@ -13,12 +13,12 @@ export default (state = INITIAL_STATE, action) => {
             return {
                 ...state,
                 question: action.payload
-            }
+            };
         case INCREMENT_QUESTIONS_COUNT:
             return {
                 ...state,
                 totalCount: state.totalCount + 1
-            }
+            };
         default:
             return state;
     }

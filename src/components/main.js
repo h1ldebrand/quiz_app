@@ -12,6 +12,7 @@ import SkipQuestion from './main/skip-question';
 import AnswerBuilding from './main/answer-building';
 import AnswerProposition from './main/answer-proposition';
 
+
 // Main page
 class Main extends Component {
 
@@ -21,10 +22,13 @@ class Main extends Component {
 
     render() {
 
-        if(this.props.question){
-            const {id, answer, question, category} = this.props.question;
-            const { fetchQuestion, incrementQuestionsCount, totalCount } = this.props;
+        const { question : questionsProps } = this.props;
 
+        if(Object.keys(questionsProps).length){
+
+            const {id, answer, question, category, transformedAnswer} = questionsProps;
+            const { fetchQuestion, incrementQuestionsCount, totalCount } = this.props;
+            console.log("answer array: ", answer);
             return (
                 <div className="main-page">
                     <ActivityLog totalCount={totalCount} />
@@ -39,7 +43,9 @@ class Main extends Component {
                         incrementQuestionsCount={incrementQuestionsCount}
                     />
                     <AnswerBuilding/>
-                    <AnswerProposition/>
+                    <AnswerProposition
+                        characters={transformedAnswer}
+                    />
                 </div>
 
             );
@@ -56,9 +62,11 @@ class Main extends Component {
 }
 
 const mapStateToProps = (state) => {
+
+    const { questions : questionsState } = state;
     return {
-        question: state.questions.question,
-        totalCount: state.questions.totalCount,
+        question: questionsState.question,
+        totalCount: questionsState.totalCount,
     }
 }
 

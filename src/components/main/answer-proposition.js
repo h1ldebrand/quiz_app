@@ -4,16 +4,25 @@ import React, { Component } from 'react';
 // Shown answer proposition chars
 class AnswerProposition extends Component {
 
+    renderList(list){
+        return list.map(item => (
+            <li key={item.id} className="inline-block character">
+                {(item.name !== " ")
+                    ? item.name
+                    : String.fromCharCode(160)
+                }
+            </li>
+        ))
+    }
+
     render() {
+        const { characters } = this.props;
         return (
             <div className="answer-proposition">
                 <div className="answer-container">
                     <div className="random-characters">
                         <ul className="inline-list">
-                            <li className="inline-block character">B</li>
-                            <li className="inline-block character">W</li>
-                            <li className="inline-block character">M</li>
-                            <li className="inline-block character">P</li>
+                            { this.renderList(characters) }
                         </ul>
                     </div>
                 </div>
