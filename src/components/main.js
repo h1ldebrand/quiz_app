@@ -8,7 +8,9 @@ import { fetchQuestion, incrementQuestionsCount } from '../actions/question';
 import ActivityLog from './main/activity-log';
 import QuestionInfo from './main/question-info';
 import Loader from './main/loader';
-import SkipQuestion from './main/skip-question'
+import SkipQuestion from './main/skip-question';
+import AnswerBuilding from './main/answer-building';
+import AnswerProposition from './main/answer-proposition';
 
 // Main page
 class Main extends Component {
@@ -36,6 +38,8 @@ class Main extends Component {
                         fetchQuestion={fetchQuestion}
                         incrementQuestionsCount={incrementQuestionsCount}
                     />
+                    <AnswerBuilding/>
+                    <AnswerProposition/>
                 </div>
 
             );
