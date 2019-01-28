@@ -3,7 +3,10 @@ import React, { Component } from 'react';
 
 // Renders data about user activity
 export default class ActivityLog extends Component {
+
     render() {
+
+        const { totalCount } = this.props;
         return (
             <div className="activity-log">
                 <div className="row">
@@ -14,7 +17,7 @@ export default class ActivityLog extends Component {
                     </div>
                     <div className="col-md-6">
                         <div className="total-questions">
-                            Total Questions: 0
+                            Total Questions: { totalCount }
                         </div>
                     </div>
                 </div>
