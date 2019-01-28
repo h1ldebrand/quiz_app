@@ -2,7 +2,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { fetchQuestion, incrementQuestionsCount } from '../actions/question';
+import {
+    fetchQuestion,
+    incrementQuestionsCount,
+    charRelocationToBoard,
+    charRelocationFromBoard
+} from '../actions/question';
 
 // Components import
 import ActivityLog from './main/activity-log';
@@ -26,9 +31,23 @@ class Main extends Component {
 
         if(Object.keys(questionsProps).length){
 
-            const {id, answer, question, category, transformedAnswer} = questionsProps;
-            const { fetchQuestion, incrementQuestionsCount, totalCount } = this.props;
-            console.log("answer array: ", answer);
+            const {
+                id,
+                answer,
+                question,
+                category,
+            } = questionsProps;
+
+            const {
+                fetchQuestion,
+                incrementQuestionsCount,
+                totalCount,
+                charRelocationToBoard,
+                transformedAnswer,
+                arrayOnBoard,
+                charRelocationFromBoard
+            } = this.props;
+
             return (
                 <div className="main-page">
                     <ActivityLog totalCount={totalCount} />
@@ -42,9 +61,13 @@ class Main extends Component {
                         fetchQuestion={fetchQuestion}
                         incrementQuestionsCount={incrementQuestionsCount}
                     />
-                    <AnswerBuilding/>
+                    <AnswerBuilding
+                        characters={arrayOnBoard}
+                        charRelocationFromBoard={charRelocationFromBoard}
+                    />
                     <AnswerProposition
                         characters={transformedAnswer}
+                        charRelocationToBoard={charRelocationToBoard}
                     />
                 </div>
 
@@ -62,12 +85,22 @@ class Main extends Component {
 }
 
 const mapStateToProps = (state) => {
-
+    console.log(state);
     const { questions : questionsState } = state;
     return {
         question: questionsState.question,
         totalCount: questionsState.totalCount,
+        transformedAnswer : questionsState.arrayInProposition,
+        arrayOnBoard: questionsState.arrayOnBoard
     }
 }
 
-export default connect(mapStateToProps, {fetchQuestion, incrementQuestionsCount})(Main)
+export default connect(
+        mapStateToProps,
+        {
+            fetchQuestion,
+            incrementQuestionsCount,
+            charRelocationToBoard,
+            charRelocationFromBoard
+        }
+    )(Main)

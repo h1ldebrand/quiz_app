@@ -2,10 +2,15 @@
 import axios from 'axios';
 
 // Actions types import
-import {FETCH_QUESTION, INCREMENT_QUESTIONS_COUNT} from "../constants/question";
+import {
+    FETCH_QUESTION,
+    INCREMENT_QUESTIONS_COUNT,
+    RELOCATE_FROM_PROPOSITION_TO_BOARD,
+    RELOCATE_FROM_BOARD_TO_PROPOSITION
+} from "../constants/question";
 
 // functions import
-import { answerTrans } from '../functions/answer-transformation';
+import { answerTrans, randomizeItems } from '../functions/answer-transformation';
 
 //receives a random question
 export const fetchQuestion = (action) => {
@@ -18,7 +23,7 @@ export const fetchQuestion = (action) => {
                     payload: {
                         id,
                         answer,
-                        transformedAnswer: answerTrans(answer),
+                        transformedAnswer: randomizeItems(answerTrans(answer)),
                         question,
                         category: category.title
                      }
@@ -30,5 +35,20 @@ export const fetchQuestion = (action) => {
 export const incrementQuestionsCount = () => {
     return {
         type: INCREMENT_QUESTIONS_COUNT
+    }
+}
+
+
+export const charRelocationToBoard = (char) => {
+    return {
+        type: RELOCATE_FROM_PROPOSITION_TO_BOARD,
+        payload: char
+    }
+}
+
+export const charRelocationFromBoard = (char) => {
+    return {
+        type: RELOCATE_FROM_BOARD_TO_PROPOSITION,
+        payload: char
     }
 }

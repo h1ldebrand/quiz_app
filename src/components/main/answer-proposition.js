@@ -4,13 +4,25 @@ import React, { Component } from 'react';
 // Shown answer proposition chars
 class AnswerProposition extends Component {
 
+    constructor(props){
+        super(props);
+        this.receiveChar = this.receiveChar.bind(this);
+    }
+
+    receiveChar(char){
+        this.props.charRelocationToBoard(char);
+    }
+
     renderList(list){
         return list.map(item => (
-            <li key={item.id} className="inline-block character">
-                {(item.name !== " ")
-                    ? item.name
-                    : String.fromCharCode(160)
-                }
+            <li
+                onClick={e => this.receiveChar(item)}
+                key={item.id}
+                className="inline-block character">
+                    {(item.name !== " ")
+                        ? item.name
+                        : String.fromCharCode(160)
+                    }
             </li>
         ))
     }
