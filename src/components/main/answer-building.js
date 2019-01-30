@@ -28,10 +28,16 @@ class AnswerBuilding extends Component {
     }
 
     render() {
-        const { characters } = this.props;
+        const { characters, arrayInProposition, answerCondition } = this.props;
+        let checkClass = "";
+
+        if(arrayInProposition.length === 0){
+            checkClass += answerCondition ? "success-answer" : "failure-answer";
+        }
+
         return (
             <div className="answer-building">
-                <div className="answer-container">
+                <div className={`answer-container ${checkClass}`}>
                     <div className="characters-place">
                         <ul className="inline-list">
                             { this.renderList(characters) }
@@ -42,5 +48,8 @@ class AnswerBuilding extends Component {
         );
     }
 }
+
+// failure-answer
+// success-answer
 
 export default AnswerBuilding;

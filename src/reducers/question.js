@@ -3,7 +3,8 @@ import {
     FETCH_QUESTION,
     INCREMENT_QUESTIONS_COUNT,
     RELOCATE_FROM_PROPOSITION_TO_BOARD,
-    RELOCATE_FROM_BOARD_TO_PROPOSITION
+    RELOCATE_FROM_BOARD_TO_PROPOSITION,
+    CHECK_ANSWER
 } from "../constants/question";
 
 // Initial states for reducers
@@ -11,7 +12,8 @@ const INITIAL_STATE = {
     question: {},
     totalCount : 0,
     arrayInProposition: [],
-    arrayOnBoard : []
+    arrayOnBoard : [],
+    checkAnswerCondition: null
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -42,6 +44,13 @@ export default (state = INITIAL_STATE, action) => {
                 arrayOnBoard,
                 arrayInProposition: [...state.arrayInProposition, action.payload]
             }
+        case CHECK_ANSWER:
+            const userAnswer = state.arrayOnBoard.reduce((result, item) => (result += item.name), '');
+            return {
+                ...state,
+                checkAnswerCondition: (state.question.answer === userAnswer)
+            }
+
         default:
             return state;
     }

@@ -2,11 +2,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
+// Actions import
 import {
     fetchQuestion,
     incrementQuestionsCount,
     charRelocationToBoard,
-    charRelocationFromBoard
+    charRelocationFromBoard,
+    checkAnswer
 } from '../actions/question';
 
 // Components import
@@ -16,6 +18,7 @@ import Loader from './main/loader';
 import SkipQuestion from './main/skip-question';
 import AnswerBuilding from './main/answer-building';
 import AnswerProposition from './main/answer-proposition';
+import ContinueQuiz from './main/continue-quiz';
 
 
 // Main page
@@ -31,6 +34,7 @@ class Main extends Component {
 
         if(Object.keys(questionsProps).length){
 
+            // question params
             const {
                 id,
                 answer,
@@ -38,6 +42,7 @@ class Main extends Component {
                 category,
             } = questionsProps;
 
+            // props
             const {
                 fetchQuestion,
                 incrementQuestionsCount,
@@ -45,9 +50,12 @@ class Main extends Component {
                 charRelocationToBoard,
                 transformedAnswer,
                 arrayOnBoard,
-                charRelocationFromBoard
+                charRelocationFromBoard,
+                checkAnswer,
+                arrayInProposition,
+                answerCondition
             } = this.props;
-
+            console.log('answer: ', answer);
             return (
                 <div className="main-page">
                     <ActivityLog totalCount={totalCount} />
@@ -64,11 +72,22 @@ class Main extends Component {
                     <AnswerBuilding
                         characters={arrayOnBoard}
                         charRelocationFromBoard={charRelocationFromBoard}
+                        answerCondition={answerCondition}
+                        arrayInProposition={arrayInProposition}
                     />
-                    <AnswerProposition
-                        characters={transformedAnswer}
-                        charRelocationToBoard={charRelocationToBoard}
-                    />
+                    {(arrayInProposition.length > 0) ? (
+                        <AnswerProposition
+                            characters={transformedAnswer}
+                            charRelocationToBoard={charRelocationToBoard}
+                            checkAnswer={checkAnswer}
+                        />
+                    ) : (
+                        answerCondition
+                            ? <ContinueQuiz />
+                            : ""
+                    )}
+
+
                 </div>
 
             );
@@ -85,13 +104,14 @@ class Main extends Component {
 }
 
 const mapStateToProps = (state) => {
-    console.log(state);
     const { questions : questionsState } = state;
     return {
         question: questionsState.question,
         totalCount: questionsState.totalCount,
         transformedAnswer : questionsState.arrayInProposition,
-        arrayOnBoard: questionsState.arrayOnBoard
+        arrayOnBoard: questionsState.arrayOnBoard,
+        arrayInProposition: questionsState.arrayInProposition,
+        answerCondition: questionsState.checkAnswerCondition
     }
 }
 
@@ -101,6 +121,7 @@ export default connect(
             fetchQuestion,
             incrementQuestionsCount,
             charRelocationToBoard,
-            charRelocationFromBoard
+            charRelocationFromBoard,
+            checkAnswer,
         }
     )(Main)

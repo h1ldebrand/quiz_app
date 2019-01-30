@@ -6,7 +6,8 @@ import {
     FETCH_QUESTION,
     INCREMENT_QUESTIONS_COUNT,
     RELOCATE_FROM_PROPOSITION_TO_BOARD,
-    RELOCATE_FROM_BOARD_TO_PROPOSITION
+    RELOCATE_FROM_BOARD_TO_PROPOSITION,
+    CHECK_ANSWER
 } from "../constants/question";
 
 // functions import
@@ -50,5 +51,11 @@ export const charRelocationFromBoard = (char) => {
     return {
         type: RELOCATE_FROM_BOARD_TO_PROPOSITION,
         payload: char
+    }
+}
+
+export const checkAnswer = () => {
+    return {
+        type : CHECK_ANSWER
     }
 }

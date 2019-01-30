@@ -11,6 +11,7 @@ class AnswerProposition extends Component {
 
     receiveChar(char){
         this.props.charRelocationToBoard(char);
+        this.props.checkAnswer()
     }
 
     renderList(list){
