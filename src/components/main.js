@@ -8,7 +8,8 @@ import {
     incrementQuestionsCount,
     charRelocationToBoard,
     charRelocationFromBoard,
-    checkAnswer
+    checkAnswer,
+    incrementCorrentQuestion
 } from '../actions/question';
 
 // Components import
@@ -19,6 +20,7 @@ import SkipQuestion from './main/skip-question';
 import AnswerBuilding from './main/answer-building';
 import AnswerProposition from './main/answer-proposition';
 import ContinueQuiz from './main/continue-quiz';
+import ProgressMessage from './main/progress-message'
 
 
 // Main page
@@ -53,12 +55,17 @@ class Main extends Component {
                 charRelocationFromBoard,
                 checkAnswer,
                 arrayInProposition,
-                answerCondition
+                answerCondition,
+                incrementCorrentQuestion,
+                correctAnswers
             } = this.props;
             console.log('answer: ', answer);
             return (
                 <div className="main-page">
-                    <ActivityLog totalCount={totalCount} />
+                    <ActivityLog
+                        totalCount={totalCount}
+                        correctAnswers={correctAnswers}
+                    />
                     <QuestionInfo
                         id={id}
                         answer={answer}
@@ -69,6 +76,13 @@ class Main extends Component {
                         fetchQuestion={fetchQuestion}
                         incrementQuestionsCount={incrementQuestionsCount}
                     />
+                    {
+                        arrayInProposition.length === 0
+                            ? <ProgressMessage
+                                answerCondition={answerCondition} />
+                            : ""
+                    }
+
                     <AnswerBuilding
                         characters={arrayOnBoard}
                         charRelocationFromBoard={charRelocationFromBoard}
@@ -83,7 +97,10 @@ class Main extends Component {
                         />
                     ) : (
                         answerCondition
-                            ? <ContinueQuiz />
+                            ? <ContinueQuiz
+                                fetchQuestion={fetchQuestion}
+                                incrementCorrentQuestion={incrementCorrentQuestion}
+                            />
                             : ""
                     )}
 
@@ -111,7 +128,8 @@ const mapStateToProps = (state) => {
         transformedAnswer : questionsState.arrayInProposition,
         arrayOnBoard: questionsState.arrayOnBoard,
         arrayInProposition: questionsState.arrayInProposition,
-        answerCondition: questionsState.checkAnswerCondition
+        answerCondition: questionsState.checkAnswerCondition,
+        correctAnswers: questionsState.correctAnswers
     }
 }
 
@@ -123,5 +141,6 @@ export default connect(
             charRelocationToBoard,
             charRelocationFromBoard,
             checkAnswer,
+            incrementCorrentQuestion
         }
     )(Main)

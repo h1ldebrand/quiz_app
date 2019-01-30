@@ -4,13 +4,15 @@ import {
     INCREMENT_QUESTIONS_COUNT,
     RELOCATE_FROM_PROPOSITION_TO_BOARD,
     RELOCATE_FROM_BOARD_TO_PROPOSITION,
-    CHECK_ANSWER
+    CHECK_ANSWER,
+    INCREMENT_CORRECT_QUESTIONS
 } from "../constants/question";
 
 // Initial states for reducers
 const INITIAL_STATE = {
     question: {},
     totalCount : 0,
+    correctAnswers: 0,
     arrayInProposition: [],
     arrayOnBoard : [],
     checkAnswerCondition: null
@@ -28,7 +30,7 @@ export default (state = INITIAL_STATE, action) => {
             return {
                 ...state,
                 arrayOnBoard : [],
-                totalCount: state.totalCount + 1
+                totalCount: ++state.totalCount
             };
         case RELOCATE_FROM_PROPOSITION_TO_BOARD:
             const arrayInProposition = state.arrayInProposition.filter(item => item.id !== action.payload.id);
@@ -49,6 +51,13 @@ export default (state = INITIAL_STATE, action) => {
             return {
                 ...state,
                 checkAnswerCondition: (state.question.answer === userAnswer)
+            }
+        case INCREMENT_CORRECT_QUESTIONS:
+            return {
+                ...state,
+                arrayOnBoard : [],
+                correctAnswers: ++state.correctAnswers,
+                totalCount: ++state.totalCount
             }
 
         default:

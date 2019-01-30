@@ -7,7 +7,9 @@ import {
     INCREMENT_QUESTIONS_COUNT,
     RELOCATE_FROM_PROPOSITION_TO_BOARD,
     RELOCATE_FROM_BOARD_TO_PROPOSITION,
-    CHECK_ANSWER
+    CHECK_ANSWER,
+    INCREMENT_CORRECT_QUESTIONS
+
 } from "../constants/question";
 
 // functions import
@@ -47,6 +49,7 @@ export const charRelocationToBoard = (char) => {
     }
 }
 
+
 export const charRelocationFromBoard = (char) => {
     return {
         type: RELOCATE_FROM_BOARD_TO_PROPOSITION,
@@ -54,8 +57,16 @@ export const charRelocationFromBoard = (char) => {
     }
 }
 
+// Checks answer
 export const checkAnswer = () => {
     return {
         type : CHECK_ANSWER
+    }
+}
+
+// Increment the correct answer count
+export const incrementCorrentQuestion = () => {
+    return {
+         type: INCREMENT_CORRECT_QUESTIONS
     }
 }

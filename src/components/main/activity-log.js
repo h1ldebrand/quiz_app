@@ -6,13 +6,13 @@ export default class ActivityLog extends Component {
 
     render() {
 
-        const { totalCount } = this.props;
+        const { totalCount, correctAnswers } = this.props;
         return (
             <div className="activity-log">
                 <div className="row">
                     <div className="col-md-6">
                         <div className="correct-answers">
-                            Correct Answers: 0
+                            Correct Answers: {correctAnswers}
                         </div>
                     </div>
                     <div className="col-md-6">
