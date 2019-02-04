@@ -22,6 +22,15 @@ import AnswerProposition from './main/answer-proposition';
 import ContinueQuiz from './main/continue-quiz';
 import ProgressMessage from './main/progress-message'
 
+// Selectors import
+import {
+    getQuestion,
+    getTotalCount,
+    getArrayInProposition,
+    getArrayOnBoard,
+    isCheckAnswerCondition,
+    getCorrectAnswers
+} from '../selectors'
 
 // Main page
 class Main extends Component {
@@ -104,7 +113,6 @@ class Main extends Component {
                             : ""
                     )}
 
-
                 </div>
 
             );
@@ -121,15 +129,15 @@ class Main extends Component {
 }
 
 const mapStateToProps = (state) => {
-    const { questions : questionsState } = state;
+
     return {
-        question: questionsState.question,
-        totalCount: questionsState.totalCount,
-        transformedAnswer : questionsState.arrayInProposition,
-        arrayOnBoard: questionsState.arrayOnBoard,
-        arrayInProposition: questionsState.arrayInProposition,
-        answerCondition: questionsState.checkAnswerCondition,
-        correctAnswers: questionsState.correctAnswers
+        question: getQuestion(state),
+        totalCount: getTotalCount(state),
+        transformedAnswer : getArrayInProposition(state),
+        arrayOnBoard: getArrayOnBoard(state),
+        arrayInProposition: getArrayInProposition(state),
+        answerCondition: isCheckAnswerCondition(state),
+        correctAnswers: getCorrectAnswers(state)
     }
 }
 
