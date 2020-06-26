@@ -1,7 +1,11 @@
 // Node modules import
 import React, { Component } from 'react';
 
-class ProgressMessage extends Component {
+type ProgressMessageProps = {
+    answerCondition: null | boolean
+}
+
+class ProgressMessage extends Component<ProgressMessageProps> {
 
     render() {
         const { answerCondition } = this.props;

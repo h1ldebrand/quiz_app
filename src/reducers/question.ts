@@ -8,17 +8,23 @@ import {
     INCREMENT_CORRECT_QUESTIONS
 } from "../constants/question";
 
+import actions from '../actions/question';
+import { InferActionsTypes, FetchingQuestionType, CharType } from "../types";
+
 // Initial states for reducers
 const INITIAL_STATE = {
-    question: {},
+    question: {} as FetchingQuestionType,
     totalCount : 0,
     correctAnswers: 0,
-    arrayInProposition: [],
-    arrayOnBoard : [],
-    checkAnswerCondition: null
+    arrayInProposition: [] as Array<CharType>,
+    arrayOnBoard : [] as Array<CharType>,
+    checkAnswerCondition: null as (null | boolean)
 };
 
-export default (state = INITIAL_STATE, action) => {
+type InitialStateType = typeof INITIAL_STATE
+type ActionsTypes = InferActionsTypes<typeof actions>
+
+export default (state = INITIAL_STATE, action: ActionsTypes): InitialStateType => {
     switch (action.type) {
         case FETCH_QUESTION:
             return {
@@ -41,6 +47,7 @@ export default (state = INITIAL_STATE, action) => {
             }
         case RELOCATE_FROM_BOARD_TO_PROPOSITION:
             const arrayOnBoard = state.arrayOnBoard.filter(item => item.id !== action.payload.id);
+            console.log('arrayOnBoard: ', arrayOnBoard)
             return {
                 ...state,
                 arrayOnBoard,

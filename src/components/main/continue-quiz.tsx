@@ -1,10 +1,14 @@
 import React, { Component } from 'react';
-import {fetchQuestion} from "../../actions/question";
+
+type ContinueQuizProps = {
+    fetchQuestion: () => void
+    incrementCorrentQuestion: () => void
+}
 
 // Allows get next quiz
-class ContinueQuiz extends Component{
+class ContinueQuiz extends Component<ContinueQuizProps>{
 
-    constructor(props){
+    constructor(props: Readonly<ContinueQuizProps>){
         super(props);
 
         this.nextQuestion = this.nextQuestion.bind(this);

@@ -1,5 +1,7 @@
 // Node modules import
 import React from 'react';
+
+// @ts-ignore
 import { Route, IndexRoute } from 'react-router-3';
 
 // Components import

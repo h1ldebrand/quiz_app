@@ -1,8 +1,13 @@
 // Node modules import
 import React, { Component } from 'react';
 
+type ActivityLogProps = {
+    totalCount: number
+    correctAnswers: number
+}
+
 // Renders data about user activity
-export default class ActivityLog extends Component {
+export default class ActivityLog extends Component<ActivityLogProps> {
 
     render() {
 

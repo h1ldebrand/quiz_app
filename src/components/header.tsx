@@ -1,8 +1,10 @@
 // Node modules import
 import React, { Component } from 'react';
 
+type HeaderProps = {}
+
 // Shows header
-export default class Header extends Component {
+export default class Header extends Component<HeaderProps> {
     render() {
         return (
             <div className="header">

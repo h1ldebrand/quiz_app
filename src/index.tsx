@@ -1,8 +1,9 @@
 //Node modules import
-import React from 'react';
-import ReactDOM from 'react-dom';
+import * as React from "react";
+import * as ReactDOM from "react-dom";
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
+// @ts-ignore
 import {browserHistory, Router} from 'react-router-3';
 import reduxThunk from 'redux-thunk';
 
@@ -15,11 +16,11 @@ import reducers from './reducers';
 
 import '../styles/index.scss';
 
-
 const createStoreWithMiddleware = applyMiddleware(reduxThunk)(createStore);
+export const store = createStoreWithMiddleware(reducers)
 
 ReactDOM.render(
-    <Provider store={createStoreWithMiddleware(reducers)}>
+    <Provider store={store}>
         <Router history={browserHistory} routes={routes} />
     </Provider>,
     document.getElementById('quiz-app')

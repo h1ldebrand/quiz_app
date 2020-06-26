@@ -1,11 +1,16 @@
 // Node modules import
 import React, { Component } from 'react';
 
-// Renders question's info
-class SkipQuestion extends Component {
+type SkipQuestionProps = {
+    fetchQuestion: () => void
+    incrementQuestionsCount: () => void
+}
 
-    constructor(){
-        super();
+// Renders question's info
+class SkipQuestion extends Component<SkipQuestionProps> {
+
+    constructor(props: Readonly<SkipQuestionProps>){
+        super(props);
 
         this.receiveNextQuestion = this.receiveNextQuestion.bind(this);
     }

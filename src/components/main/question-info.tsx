@@ -1,8 +1,15 @@
 // Node modules import
 import React, { Component } from 'react';
 
+type QuestionInfoProps = {
+    id: number
+    answer: string
+    question: string
+    category: string
+}
+
 // Renders question's info
-export default class QuestionInfo extends Component {
+export default class QuestionInfo extends Component<QuestionInfoProps> {
     render() {
         const {id, answer, question, category}  = this.props;
         return (

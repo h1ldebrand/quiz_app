@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 
 // Actions import
 import {
-    fetchQuestion,
     incrementQuestionsCount,
     charRelocationToBoard,
     charRelocationFromBoard,
@@ -31,9 +30,26 @@ import {
     isCheckAnswerCondition,
     getCorrectAnswers
 } from '../selectors'
+import {fetchQuestion} from "../actions/question";
+import {AppStateType, CharType} from "../types";
+
+type MapStatePropsType = ReturnType<typeof mapStateToProps>
+
+type MapDispatchPropsType = {
+    fetchQuestion: () => void
+    incrementQuestionsCount: () => void
+    charRelocationToBoard: (char: CharType) => void
+    charRelocationFromBoard: (char: CharType) => void
+    checkAnswer: () => void,
+    incrementCorrentQuestion: () => void
+}
+
+type OwnPropsType = {}
+
+type MainPropsType = MapStatePropsType & MapDispatchPropsType & OwnPropsType
 
 // Main page
-class Main extends Component {
+class Main extends Component<MainPropsType> {
 
     componentWillMount() {
         this.props.fetchQuestion();
@@ -128,8 +144,7 @@ class Main extends Component {
     }
 }
 
-const mapStateToProps = (state) => {
-
+const mapStateToProps = (state: AppStateType) => {
     return {
         question: getQuestion(state),
         totalCount: getTotalCount(state),
@@ -141,7 +156,7 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(
+export default connect<MapStatePropsType, MapDispatchPropsType>(
         mapStateToProps,
         {
             fetchQuestion,
@@ -149,6 +164,6 @@ export default connect(
             charRelocationToBoard,
             charRelocationFromBoard,
             checkAnswer,
-            incrementCorrentQuestion
+            incrementCorrentQuestion,
         }
     )(Main)

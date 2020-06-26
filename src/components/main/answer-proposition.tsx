@@ -1,21 +1,28 @@
 // Node modules import
 import React, { Component } from 'react';
+import {CharType} from "../../types";
+
+type AnswerPropositionProps = {
+    characters: Array<CharType>
+    charRelocationToBoard: (char: CharType) => void
+    checkAnswer: () => void
+}
 
 // Shown answer proposition chars
-class AnswerProposition extends Component {
+class AnswerProposition extends Component<AnswerPropositionProps> {
 
-    constructor(props){
+    constructor(props: Readonly<AnswerPropositionProps>){
         super(props);
         this.receiveChar = this.receiveChar.bind(this);
     }
 
-    receiveChar(char){
+    receiveChar(char: CharType){
         this.props.charRelocationToBoard(char);
         this.props.checkAnswer()
     }
 
-    renderList(list){
-        return list.map(item => (
+    renderList(list: Array<CharType>){
+        return list.map((item) => (
             <li
                 onClick={e => this.receiveChar(item)}
                 key={item.id}

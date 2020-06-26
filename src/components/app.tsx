@@ -4,8 +4,10 @@ import React, { Component } from 'react';
 // Component import
 import Header from './header';
 
+type AppProps = {}
+
 // Layout component
-export default class App extends Component {
+export default class App extends Component<AppProps> {
     render() {
         return (
             <div className="app">
